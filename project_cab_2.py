@@ -200,7 +200,7 @@ def Bookingcab(username):
     print ('____BOOK YOUR RIDE !!____ ')
     print(' \n SELECT DESTINATION :\n')
     #print('No.   Drop   cost\n')
-    wb = xlrd.open_workbook(r"E:\#1 attain u\github\python-project-devansh-dev-au9\project_booking_cab\Destination_&_cost.xlsx")
+    """wb = xlrd.open_workbook(r"E:\#1 attain u\github\python-project-devansh-dev-au9\project_booking_cab\Destination_&_cost.xlsx")
     sheet = wb.sheet_by_index(0)
     sheet.cell_value(0,0)
     for i in range(sheet.nrows):
@@ -208,7 +208,7 @@ def Bookingcab(username):
     locNumber = int(input("\n Select Destination:"))
     for i in range(sheet.nrows):
         if(i == locNumber):
-            pickpoint = sheet.cell_value(i,0)
+            pickpoint = sheet.cell_value(i,0)"""
     
     print('Select cab:')
 
@@ -221,6 +221,28 @@ def Bookingcab(username):
             print(i,sheet.cell_value(i,1),sheet.cell_value(i,2),sheet.cell_value(i,3),sheet.cell_value(i,4))
     choosedCab = int(input('Choose Cab Number:'))
     print('Your Cab is booked succesfully, ENJOY THE RIDE !!')
+
+def cab_booking (data_profile) :
+        print('select cab destination')
+        pickup = input('pickup:')
+        drop = input('drop:')
+        bookingdetails = [pickup, drop,]
+        print('information submitted' )
+        print('booking details')
+        bookingdetails(pickup,drop)
+
+def bookingdetails(pickup,drop):
+    bookingdetails = [pickup, drop,]
+    
+    df = DataFrame([bookingdetails], columns = ['pickup', 'drop'])
+   
+    if(os.path.isfile(r'E:\#1 attain u\github\python-project-devansh-dev-au9\project_booking_cab\booking.xlsx')):
+        existingData = pd.read_excel(r'E:\#1 attain u\github\python-project-devansh-dev-au9\project_booking_cab\boking.xlsx')
+        allData = [existingData,df]
+        appnd_df = pd.concat(allData)
+        appnd_df.to_excel(r'E:\#1 attain u\github\python-project-devansh-dev-au9\project_booking_cab\booking.xlsx',index = False, header=True)
+    else:
+        df.to_excel(r'E:\#1 attain u\github\python-project-devansh-dev-au9\project_booking_cab\booking.xlsx',index = False, header=True)
 
 
 

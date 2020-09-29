@@ -143,7 +143,7 @@ def registerDriver(name,phone,address,carType,vehicleNumber, username,password):
         df.to_excel(r'E:\#1 attain u\github\python-project-devansh-dev-au9\project_booking_cab\Registered Driver.xlsx',index = False, header=True)
     
 
-
+  
 #==============================================================================
 #               A U T H E N T I C A T I O N
 #==============================================================================
@@ -161,7 +161,8 @@ def Pass_Authentication(username,password):
                 Bookingcab(username)
             else :
                 sys.exit()
-        
+
+
 #________Driver_Authentication______#
 
 def Driv_Authentication(username,password):
@@ -180,12 +181,14 @@ def Driv_Authentication(username,password):
 #==============================================================================
 
 def Driver_profile(username):
-    wb = xlrd.open_workbook(r"E:\#1 attain u\github\python-project-devansh-dev-au9\project_booking_cab\Cab_Availability.xlsx")
+    df = pd.read_excel (r'E:\#1 attain u\github\python-project-devansh-dev-au9\project_booking_cab\Registered Driver.xlsx')
+    print (df)
+    """wb = xlrd.open_workbook("E:\#1 attain u\github\python-project-devansh-dev-au9\project_booking_cab\Cab_Availability.xlsx")
     sheet = wb.sheet_by_index(0)
     sheet.cell_value(0,0)
     for i in range(sheet.nrows):
-        if(sheet.cell_value(i,3) == username):
-            print(i,sheet.cell_value(i,1),sheet.cell_value(i,2),sheet.cell_value(i,3),sheet.cell_value(i,4),sheet.cell_value(i,5),sheet.cell_value(i,6))
+        if(sheet.cell_value(i,5) == username):
+            print(i,sheet.row_value(0,i))"""
 
 #==============================================================================
 #           U S E R          P R O F I L E
@@ -199,7 +202,7 @@ def Bookingcab(username):
     pickpoint = ''
     print ('____BOOK YOUR RIDE !!____ ')
     print(' \n SELECT DESTINATION :\n')
-    #print('No.   Drop   cost\n')
+    #print('No.   cost  drop\n')
     wb = xlrd.open_workbook(r"E:\#1 attain u\github\python-project-devansh-dev-au9\project_booking_cab\Destination_&_cost.xlsx")
     sheet = wb.sheet_by_index(0)
     sheet.cell_value(0,0)
@@ -209,9 +212,10 @@ def Bookingcab(username):
     for i in range(sheet.nrows):
         if(i == locNumber):
             pickpoint = sheet.cell_value(i,0)
-    
-    print('Select cab:')
 
+    print('Select cab:')
+    df = pd.read_excel (r'E:\#1 attain u\github\python-project-devansh-dev-au9\project_booking_cab\Cab_Availability.xlsx')
+    print (df)
     wb = xlrd.open_workbook(r"E:\#1 attain u\github\python-project-devansh-dev-au9\project_booking_cab\Cab_Availability.xlsx")
     sheet = wb.sheet_by_index(0)
     sheet.cell_value(0,0)
@@ -221,6 +225,11 @@ def Bookingcab(username):
             print(i,sheet.cell_value(i,1),sheet.cell_value(i,2),sheet.cell_value(i,3),sheet.cell_value(i,4))
     choosedCab = int(input('Choose Cab Number:'))
     print('Your Cab is booked succesfully, ENJOY THE RIDE !!')
+    End_trip = input ('Want to End ride ? \n yes or no :')
+    if(End_trip == 'yes'):
+           print('Your Cab ride is Ended succesfully, please pay the amount mention previously on time of your booking !!')
+    else :
+            sys.exit()
 
 
 
